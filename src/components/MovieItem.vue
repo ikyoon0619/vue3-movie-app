@@ -7,7 +7,11 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div :style="{ backgroundImage: `url(${movie.Poster})` }" class="movie">
+  <RouterLink
+    :to="`/movie/${movie.imdbID}`"
+    :style="{ backgroundImage: `url(${movie.Poster})` }"
+    class="movie"
+  >
     <img :src="movie.Poster" alt="" width="200" />
     <div class="info">
       <div class="year">
@@ -17,7 +21,7 @@ const props = defineProps({
         {{ movie.Title }}
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>
@@ -25,7 +29,7 @@ const props = defineProps({
 .movie {
   $width: 168px;
   width: $width;
-  height: $width * 3 / 2;
+  height: calc($width * 3 / 2);
   margin: 10px;
   border-radius: 4px;
   background-color: $gray-400;

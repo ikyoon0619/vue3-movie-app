@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import store from "../store";
 import MovieItem from "./MovieItem.vue";
+import Loader from "./Loader.vue";
 
 const movies = computed(() => {
   return store.state.movie.movies;
@@ -9,11 +10,14 @@ const movies = computed(() => {
 const message = computed(() => {
   return store.state.movie.message;
 });
+const loading = computed(() => {
+  return store.state.movie.loading;
+});
 </script>
 <template>
   <div class="container">
     <div :class="{ 'no-result': !movies.length }" class="inner">
-      <div class="spinner-border text-primary"></div>
+      <Loader v-if="loading" />
       <div v-if="message" class="message">{{ message }}</div>
       <div v-else class="movies">
         <MovieItem v-for="movie in movies" :key="movie.imdbID" :movie="movie" />
