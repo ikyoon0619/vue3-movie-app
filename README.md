@@ -1,7 +1,4 @@
-# Vue3-IMDb-Project
-Vue3 + IMDb
-
-## 프로젝트 소개
+# Vue3-OMDb-Project 소개
 Vue3와 OMDb API를 사용하는 영화 검색 애플리케이션입니다.
 
 ## 개발 기간
@@ -13,7 +10,7 @@ Vue3와 OMDb API를 사용하는 영화 검색 애플리케이션입니다.
 - Vuex
 - Vue Router
 
-## Specs
+## 💡 Specs
 - Vue3
 - Vuex
 - Vue-Router
