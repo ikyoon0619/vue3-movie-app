@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <RouterLink to="/" class="logo"><span> OBDbAPI</span>.COM </RouterLink>
+  <RouterLink to="/" class="logo"><span> OMDBAPI</span>.COM </RouterLink>
 </template>
 <style lang="scss" scoped>
 @import "../scss/main.scss";
