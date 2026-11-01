@@ -8,7 +8,6 @@
       {{ name }}
     </div>
     <div>{{ email }}</div>
-    <div>{{ phone }}</div>
   </div>
 </template>
 
@@ -26,7 +25,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("about", ["name", "email", "phone", "image"]),
+    ...mapState("about", ["name", "email", "image"]),
   },
   mounted() {
     this.init();

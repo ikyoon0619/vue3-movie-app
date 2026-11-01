@@ -46,7 +46,7 @@ function apply() {
       class="form-control"
       v-model="title"
       placeholder="Search for Movies, Series & more"
-      @key.enter="apply"
+      @keyup.enter="apply"
     />
 
     <div class="selects">

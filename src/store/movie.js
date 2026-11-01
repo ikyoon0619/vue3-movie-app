@@ -63,7 +63,7 @@ export default {
       } catch (error) {
         commit("updateState", {
           movies: [],
-          message,
+          message: error,
         });
       } finally {
         commit("updateState", { loading: false });
@@ -105,7 +105,6 @@ function _fetchMovie(payload) {
     axios
       .get(url)
       .then((res) => {
-        console.log("res", res);
         if (res.data.Error) reject(res.data.Error);
         resolve(res);
       })
