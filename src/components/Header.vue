@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Logo from "./Logo.vue";
 const navigations = ref([
   { name: "Home", href: "/" },
-  { name: "Movie", href: "/movie" },
+  { name: "Movie", href: "/movie/tt4520988" },
   { name: "About", href: "/about" },
 ]);
 </script>
