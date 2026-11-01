@@ -2,7 +2,7 @@
 
 OMDb API로 영화·시리즈를 검색하고 상세 정보를 볼 수 있는 Vue 3 SPA입니다.
 
-**🔗 라이브 데모:** https://ikyoon0619.github.io/vue3-movie-app/
+**🔗 라이브 데모:** https://superb-croissant-161b98.netlify.app/
 
 ![홈 화면](docs/screenshots/home.png)
 
@@ -22,7 +22,7 @@ OMDb API로 영화·시리즈를 검색하고 상세 정보를 볼 수 있는 Vu
 - **HTTP**: Axios
 - **UI**: Bootstrap 5, SCSS
 - **빌드**: Vite 4
-- **배포**: GitHub Actions → GitHub Pages
+- **배포**: Netlify (main 브랜치 자동 배포, PR마다 미리보기)
 - **코드 품질**: ESLint, Prettier
 
 ## 주요 기능
@@ -72,5 +72,4 @@ npm run preview   # 빌드 결과 미리보기
 
 ## 배포
 
-`main` 브랜치에 push 하면 GitHub Actions(`.github/workflows/deploy.yml`)가 빌드 후 GitHub Pages에 배포합니다.
-GitHub Pages는 `/<저장소 이름>/` 경로로 서비스되므로 빌드할 때 `BASE_PATH` 환경 변수로 경로를 지정합니다.
+Netlify에 저장소가 연결되어 있어 `main` 브랜치에 push 하면 자동으로 배포되고, PR을 열면 미리보기 주소가 만들어집니다.
