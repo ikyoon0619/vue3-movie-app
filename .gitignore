@@ -26,3 +26,6 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+# Netlify 로컬 환경변수 (API 키)
+.env
+.netlify

@@ -33,34 +33,26 @@ export default {
       });
 
       try {
-        const res = await _fetchMovie({
-          ...payload,
-          page: 1,
-        });
-
+        // 1페이지를 먼저 받아 전체 결과 수를 확인
+        const res = await _fetchMovie({ ...payload, page: 1 });
         const { Search, totalResults } = res.data;
-        commit("updateState", {
-          movies: Search,
-        });
 
+        // 더 받을 페이지 수: 전체 페이지 수와 선택한 개수(10/20/30) 중 작은 쪽
         const total = parseInt(totalResults, 10);
-        const pageLength = Math.ceil(total / 10);
+        const pageLength = Math.min(Math.ceil(total / 10), payload.number / 10);
 
-        //
-        if (pageLength > 1) {
-          for (let page = 2; page <= pageLength; page += 1) {
-            if (page > payload.number / 10) break;
-            const res = await _fetchMovie({
-              ...payload,
-              page,
-            });
-            const { Search } = res.data;
-            commit("updateState", {
-              movies: [...state.movies, ...Search],
-            });
-          }
+        // 2페이지부터는 한 번에 동시에 요청 (하나씩 기다리지 않음)
+        const requests = [];
+        for (let page = 2; page <= pageLength; page += 1) {
+          requests.push(_fetchMovie({ ...payload, page }));
         }
-      } catch (error) {
+        const rest = await Promise.all(requests);
+
+        commit("updateState", {
+          movies: [...Search, ...rest.flatMap((r) => r.data.Search || [])],
+        });
+      } catch (message) {
+        // _fetchMovie가 reject한 에러 문구를 그대로 화면에 보여 준다
         commit("updateState", {
           movies: [],
           message,
@@ -95,22 +87,22 @@ export default {
 
 function _fetchMovie(payload) {
   const { title, type, year, page, id } = payload;
-  const OMDB_API_KEY = "b7fe54e2";
 
-  const url = id
-    ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}&plot=full`
-    : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`;
+  // API 키 없이 우리 Netlify Function을 부른다
+  const params = id
+    ? { i: id, plot: "full" }
+    : { s: title, type, y: year, page };
 
   return new Promise((resolve, reject) => {
     axios
-      .get(url)
+      .get("/.netlify/functions/movie", { params })
       .then((res) => {
-        console.log("res", res);
-        if (res.data.Error) reject(res.data.Error);
+        if (res.data.Error) return reject(res.data.Error);
         resolve(res);
       })
       .catch((err) => {
-        reject(err.message);
+        // Function이 400/500을 보내면 그 안의 Error 문구를 우선 사용
+        reject(err.response?.data?.Error || err.message);
       });
   });
 }
