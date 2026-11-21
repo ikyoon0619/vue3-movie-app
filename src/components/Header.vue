@@ -1,11 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import Logo from "./Logo.vue";
-const navigations = ref([
-  { name: "Home", href: "/" },
-  { name: "Movie", href: "/movie" },
-  { name: "About", href: "/about" },
-]);
+const navigations = ref([{ name: "Home", href: "/" }]);
 </script>
 
 <template>
