@@ -1,16 +1,20 @@
 # Vue3-OMDb-Project 소개
+
 Vue3와 OMDb API를 사용하는 영화 검색 애플리케이션입니다.
 
 ## 개발 기간
-* 23.04 ~ 23.06
+
+- 23.04 ~ 23.06
 
 ## 📖 Docs
+
 - Vue3
 - Bootstrap
 - Vuex
 - Vue Router
 
 ## 💡 Specs
+
 - Vue3
 - Vuex
 - Vue-Router
@@ -20,39 +24,26 @@ Vue3와 OMDb API를 사용하는 영화 검색 애플리케이션입니다.
 - Lodash
 
 ## 주요 기능
+
 - 영화 검색
 
+## 구조: API 키는 서버에만
 
-This template should help get you started developing with Vue 3 in Vite.
+```
+브라우저 (Vue) ──▶ /.netlify/functions/movie ──▶ OMDb API
+                   (Netlify Function, 키는 환경변수)
+```
 
-## Recommended IDE Setup
+- 브라우저 코드에는 API 키가 없습니다. OMDb 호출은 Netlify Function(`functions/movie/movie.js`)이 대신 합니다.
+- 키는 Netlify 환경변수 `OMDB_API_KEY`에 저장합니다.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## 로컬 실행
 
 ```sh
 npm install
+npm install -g netlify-cli   # 처음 한 번
+cp .env.example .env         # .env에 OMDb 키 입력
+netlify dev                  # http://localhost:8888 (Vue + Function 함께 실행)
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+`npm run dev`만 실행하면 Function이 없어서 검색이 되지 않습니다.
