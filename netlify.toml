@@ -1,2 +1,6 @@
 [build]
     functions = "functions"
+
+[build.environment]
+    # @netlify/blobs(사용량 저장)는 Node 22.12 이상이 필요
+    NODE_VERSION = "22"
